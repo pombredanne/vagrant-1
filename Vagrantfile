@@ -6,6 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "precise64"
+  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   # Share the Sky port with the host machine.
   config.vm.network :forwarded_port, guest: 8585, host: 8585
@@ -18,5 +19,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # useful when developing on Sky. You must run "vagrant reload"
   # after changing this.
   #
-  # config.vm.synced_folder ENV["GOPATH"], "/gocode"
+  config.vm.synced_folder ENV["GOPATH"], "/gocode"
 end

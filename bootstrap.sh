@@ -4,7 +4,12 @@ SKY=sky-unstable
 DEPS=sky-deps-unstable
 
 export GOPATH=/gocode
-export GO=/usr/local/go/bin/go
+GO=/usr/local/go/bin/go
+
+# Setup profile.
+echo "export GOPATH=$GOPATH" | sudo tee /etc/profile.d/go.sh > /dev/null
+echo "PATH=\$PATH:/usr/local/go/bin:$GOPATH/bin" | sudo tee -a /etc/profile.d/go.sh > /dev/null
+source /etc/profile
 
 # Create man1 directory for LMDB.
 sudo mkdir -p /usr/local/man/man1
