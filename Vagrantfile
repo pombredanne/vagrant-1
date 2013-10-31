@@ -19,5 +19,5 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # useful when developing on Sky. You must run "vagrant reload"
   # after changing this.
   #
-  config.vm.synced_folder ENV["GOPATH"], "/gocode"
+  # config.vm.synced_folder ENV["GOPATH"], "/gocode"
 end
