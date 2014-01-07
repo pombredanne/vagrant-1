@@ -27,6 +27,13 @@ if [ ! -d "/usr/local/go" ]; then
 	sudo tar -C /usr/local -xzf go1.1.2.linux-amd64.tar.gz
 fi
 
+# Install LLVM dependency.
+if [ ! -f "/usr/local/bin/llvm-config" ]; then
+	sudo apt-get -y update
+	sudo apt-get install llvm-3.2
+	sudo ln -s /usr/bin/llvm-config-3.2 /usr/local/bin/llvm-config
+fi
+
 # Download and install Sky dependencies.
 if [ ! -d "$DEPS" ]; then
 	rm -rf ${DEPS}
@@ -43,6 +50,9 @@ sudo ldconfig
 if [ ! -d "$GOPATH" ]; then
 	mkdir -p $GOPATH/src/github.com/skydb
 	git clone -b unstable https://github.com/skydb/sky.git $GOPATH/src/github.com/skydb/sky
+	(
+		cd $GOPATH/src/github.com/axw/gollvm && source ./install.sh
+	)
 	$GO get github.com/skydb/sky/...
 fi
 
